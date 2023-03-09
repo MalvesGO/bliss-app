@@ -35,7 +35,9 @@ function App() {
       {health === 'OK' ? (
         <BrowserRouter>
           <Routes>
-            <Route exact path="/" element={<Questions />} />
+            {/* <Route exact path="/" element={<Questions />} /> */}
+            {/* route like this /questions?filter=${}*/}
+            <Route path="/questions" element={<Questions />} />
             <Route path="/questions/:question_id" element={<QuestionDetails />} />
           </Routes>
         </BrowserRouter>

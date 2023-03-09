@@ -26,7 +26,6 @@ const Questions = () => {
     // GET /questions?limit={limit}&offset={offset}&filter={filter} 
     try {
       const response = await api.get(`/questions?limit=${limit}&offset=${offset}&filter=${search}`)
-      console.log(response.data)
       setQuestions(response.data)
       setLoading(false)
       setError(null)

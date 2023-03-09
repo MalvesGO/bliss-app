@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 
 import { IoMdArrowRoundBack } from 'react-icons/io'
 
@@ -34,10 +34,6 @@ const QuestionDetails = () => {
     getQuestion()
   }, [])
 
-  function GoBack() {
-    window.history.back()
-  }
-
   return (
     <>
       <Header />
@@ -52,11 +48,11 @@ const QuestionDetails = () => {
                     <h2>{question.question}</h2>
                     <p>{question.published_at}</p>
                   </div>
-                  <IoMdArrowRoundBack
-                    onClick={GoBack}
-                    fontSize={26}
-                    style={{ cursor: 'pointer' }}
-                  />
+
+                  <Link to='/questions'>
+                    <IoMdArrowRoundBack size={30} />
+                  </Link>
+                  
                 </div>
 
                 <img className='image_url' src={question.image_url} alt={question.image_url} />
