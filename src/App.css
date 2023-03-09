@@ -1,0 +1,24 @@
+.serverDown{
+    width: 100vw;
+    height: 100vh;
+    background-color: #535cfa;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.message{
+    display: flex;
+    flex-direction: column;
+}
+
+.buttonRetry{
+    background-color: #fff;
+    color: #535cfa;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 20px;
+    cursor: pointer;
+}

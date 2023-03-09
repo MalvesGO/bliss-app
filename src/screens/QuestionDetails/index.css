@@ -1,0 +1,35 @@
+.questionDetails {
+    margin-top: 2rem;
+}
+
+.questionHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.questionCards {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.questionCard {
+    width: 30%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.image_url {
+  display: block;
+  margin: 0 auto;
+}
