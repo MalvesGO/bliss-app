@@ -1,7 +1,8 @@
 .questionsList {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
 }
 
 .question {
@@ -38,16 +39,44 @@
     font-size: 1rem;
 }
 
-.button,
-form input {
-    border-radius: 8px;
-    height: 60px;
-    width: 49%;
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    gap: 1rem;
 }
 
-form input {
-    border: 1px solid #dcdce6;
-    color: #333;
-    margin: 5px;
-    padding: 0 24px;
+.search {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    gap: 1rem;
+    margin-bottom: 2rem;
 }
+
+.search input {
+    padding: 0.5rem 2rem;
+    border-radius: 8px;
+    border: 1px solid #535CFA;
+    outline: none;
+}
+
+.search button {
+    background: #535CFA;
+    border: none;
+    padding: 0.5rem 2rem;
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.pagination button {
+    background: #535CFA;
+    border: none;
+    padding: 0.5rem 2rem;
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    margin-bottom: 3rem;
+}
+

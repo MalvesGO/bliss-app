@@ -11,33 +11,41 @@ import api from '../../services/api'
 const Questions = () => {
 
   let navigate = useNavigate();
+
   const [questions, setQuestions] = useState([])
+  const [total, setTotal] = useState(0)
   const [search, setSearch] = useState('')
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
   const [offset, setOffset] = useState(0)
   const [limit, setLimit] = useState(10)
 
   async function fetchQuestions() {
     // GET /questions?limit={limit}&offset={offset}&filter={filter} 
-    try {
-      const response = await api.get(`/questions?limit=${limit}&offset=${offset}&filter=${search}`)
+    if (search === '') {
+      const response = await api.get(`/questions?limit=${limit}&offset=${offset}`)
+      setTotal(response.data.length)
       setQuestions(response.data)
       setLoading(false)
-      setError(null)
-    } catch (error) {
-      setError(error)
-      setLoading(false)
+      return
     }
+    const response = await api.get(`/questions?limit=${limit}&offset=${offset}&filter=${search}`)
+    setTotal(response.data.length)
+    setQuestions(response.data)
+    setLoading(false)
   }
 
   function handleNavigateToQuestion(id) {
     navigate(`/questions/${id}`)
   }
 
+  function cancelSearch() {
+    setSearch('')
+    fetchQuestions()
+  }
+
   useEffect(() => {
     fetchQuestions()
-  }, [])
+  }, [offset])
 
   return (
     <>
@@ -47,18 +55,11 @@ const Questions = () => {
         {
           loading ? <Loading /> :
             <>
-              <form className='form' >
-                <input
-                  style={{ marginBottom: '2rem' }}
-                  placeholder='Search questions'
-                  type="text"
-                  value={search}
-                  onChange={(event) => {
-                    setSearch(event.target.value)
-                  }}
-                />
-                <button className='button' type="submit">Search</button>
-              </form>
+              <div className='search'>
+                <input type='text' placeholder='Pesquisar' value={search} onChange={(e) => setSearch(e.target.value)} />
+                <button onClick={() => fetchQuestions()}>Pesquisar</button>
+                <button onClick={() => cancelSearch()}>Cancelar</button>
+              </div>
 
               <ul className='questionsList'>
                 {
@@ -82,15 +83,14 @@ const Questions = () => {
                 }
               </ul>
 
-              <button>
-                Next
-              </button>
+              <div className='pagination'>
+                <button onClick={() => setOffset(offset - limit)} disabled={offset === 0}>Anterior</button>
+                <b>
+                  PAGE: {offset / limit + 1} - RESULTS: {total}
+                </b>
+                <button onClick={() => setOffset(offset + limit)}>Próximo</button>
+              </div>
 
-              <span>page 1 of 10</span>
-
-              <button>
-                Previous
-              </button>
             </>
         }
       </div>
