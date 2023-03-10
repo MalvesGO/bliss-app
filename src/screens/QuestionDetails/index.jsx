@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 
 import { IoMdArrowRoundBack } from 'react-icons/io'
+import { HiOutlineShare } from 'react-icons/hi'
 
 import './index.css'
 
@@ -45,14 +46,25 @@ const QuestionDetails = () => {
 
                 <div className='questionHeader'>
                   <div>
-                    <h2>{question.question}</h2>
-                    <p>{question.published_at}</p>
+                    <h1>{question.question}</h1>
+                    <p>{new Date(question.published_at).toLocaleDateString('pt-BR', {
+                      day: '2-digit',
+                      month: '2-digit',
+                      year: 'numeric'
+                    })}</p>
                   </div>
 
-                  <Link to='/questions'>
-                    <IoMdArrowRoundBack size={30} />
-                  </Link>
-                  
+                  <div className='actions'>
+                    <Link to='/questions'>
+                      <IoMdArrowRoundBack size={30} />
+                    </Link>
+
+                    <Link to='/questions'>
+                      <HiOutlineShare size={30} />
+                    </Link>
+
+                  </div>
+
                 </div>
 
                 <img className='image_url' src={question.image_url} alt={question.image_url} />
@@ -69,6 +81,9 @@ const QuestionDetails = () => {
                     })
                   }
                 </div>
+
+                <button>Vote</button>
+
               </div>
             </>
           )
