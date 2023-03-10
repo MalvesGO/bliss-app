@@ -2,11 +2,13 @@ import React from 'react'
 
 import './index.css'
 
+import Logo from '../../assets/logo.png'
+
 const Header = ({health}) => {
   return (
     <div className='header'>
       <div>
-        <h1>Bliss Applications</h1>
+        <img src={Logo} alt="" />
       </div>
     </div>
   )
