@@ -1,12 +1,16 @@
+import './index.css'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import './index.css'
+// api
+import api from '../../services/api'
 
+// components
 import Header from '../../components/Header'
 import Loading from '../../components/Loading'
-
-import api from '../../services/api'
+import Search from '../../components/Search'
+import QuestionsList from '../../components/QuestionsList'
+import Pagination from '../../components/Pagination'
 
 const Questions = () => {
 
@@ -51,46 +55,19 @@ const Questions = () => {
     <>
       <Header />
       <div className='container'>
-
         {
-          loading ? <Loading /> :
+          loading ?
+            <Loading />
+            :
             <>
-              <div className='search'>
-                <input type='text' placeholder='Pesquisar' value={search} onChange={(e) => setSearch(e.target.value)} />
-                <button onClick={() => fetchQuestions()}>Pesquisar</button>
-                <button onClick={() => cancelSearch()}>Cancelar</button>
-              </div>
+              {/* search component */}
+              <Search search={search} setSearch={setSearch} fetchQuestions={fetchQuestions} cancelSearch={cancelSearch} />
 
-              <ul className='questionsList'>
-                {
-                  questions.map((question) => {
-                    return (
-                      <li className='question' key={question.id} onClick={() => handleNavigateToQuestion(question.id)}>
-                        <img src={question.thumb_url} alt={question.thumb_url} />
-                        <div className='info'>
-                          <h2 className='title'>{question.question}</h2>
-                          <p className='date'>{
-                            new Date(question.published_at).toLocaleDateString('pt-BR', {
-                              day: '2-digit',
-                              month: '2-digit',
-                              year: 'numeric'
-                            })
-                          }</p>
-                        </div>
-                      </li>
-                    )
-                  })
-                }
-              </ul>
+              {/* questions list component */}
+              <QuestionsList questions={questions} handleNavigateToQuestion={handleNavigateToQuestion} />
 
-              <div className='pagination'>
-                <button onClick={() => setOffset(offset - limit)} disabled={offset === 0}>Anterior</button>
-                <b>
-                  PAGE: {offset / limit + 1} - RESULTS: {total}
-                </b>
-                <button onClick={() => setOffset(offset + limit)}>Próximo</button>
-              </div>
-
+              {/* pagination component */}
+              <Pagination offset={offset} setOffset={setOffset} limit={limit} setLimit={setLimit} total={total} />
             </>
         }
       </div>

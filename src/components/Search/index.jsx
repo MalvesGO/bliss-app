@@ -1,19 +1,14 @@
 import React from 'react'
+import './index.css'
 
-const Search = () => {
-
-    const [search, setSearch] = React.useState('')
-
+const Search = ({ search, setSearch, fetchQuestions, cancelSearch }) => {
     return (
-        <div>
-            <h1>Search</h1>
-            <input
-                type="text"
-                value={search}
-                onChange={(event) => {
-                    setSearch(event.target.value)
-                }}
-            />
+        <div className='search'>
+            <input type='text' placeholder='Pesquisar' value={search} onChange={(e) => setSearch(e.target.value)} />
+            <div className='actions'>
+                <button className='button' onClick={() => fetchQuestions()}>Pesquisar</button>
+                <button className='button' onClick={() => cancelSearch()}>Cancelar</button>
+            </div>
         </div>
     )
 }

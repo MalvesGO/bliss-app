@@ -1,14 +1,18 @@
+import './index.css'
+
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
+
+// libs
 import Swal from 'sweetalert2'
 
 import { IoMdArrowRoundBack } from 'react-icons/io'
 import { HiOutlineShare } from 'react-icons/hi'
 
-import './index.css'
-
+// api
 import api from '../../services/api'
 
+// components
 import Header from '../../components/Header'
 import Loading from '../../components/Loading'
 
@@ -93,7 +97,6 @@ const QuestionDetails = () => {
       }
     })
   }
-
 
   useEffect(() => {
     getQuestion()
