@@ -72,7 +72,7 @@ const QuestionDetails = () => {
       confirmButtonText: 'Send',
       showLoaderOnConfirm: true,
       preConfirm: (email) => {
-        return api.post('/share', { destination_email: email, content_url: window.location.href })
+        return api.post(`/share?destination_email=${email}&content_url=${window.location.href}`)
           .then(response => {
             if (response.status === 200) {
               return email
@@ -127,7 +127,11 @@ const QuestionDetails = () => {
                     <Link to='/questions'>
                       <IoMdArrowRoundBack size={30} />
                     </Link>
-                    <HiOutlineShare size={30} onClick={handleShare} />
+                    <HiOutlineShare
+                      size={30}
+                      onClick={handleShare}
+                      style={{ cursor: 'pointer' }}
+                    />
                   </div>
                 </div>
 

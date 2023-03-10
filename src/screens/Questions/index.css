@@ -10,10 +10,10 @@
     padding: 1rem;
     border-radius: 8px;
     color: #fff;
+}
 
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+.question .info{
+    margin-left: 1rem;
 }
 
 .questionsList img {
