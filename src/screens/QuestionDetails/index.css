@@ -65,3 +65,11 @@
   display: block;
   margin: 0 auto;
 }
+
+/* media query mobile */
+
+@media (max-width: 768px) {
+    .image_url {
+        width: 100%;
+      }
+}
