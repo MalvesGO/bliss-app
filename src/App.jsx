@@ -1,83 +1,55 @@
-import { useState, useEffect } from 'react'
+import { useContext } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Lottie from 'react-lottie-player'
-import { MdSignalWifiConnectedNoInternet1 } from 'react-icons/md'
+
+import { ConnectionProvider, ConnectionContext } from './contexts/ConnectionContext'
 
 import './App.css'
 
-import api from './services/api'
-
-import lottieJson from './assets/data.json'
-
 import Questions from './screens/Questions'
 import QuestionDetails from './screens/QuestionDetails'
+import Loading from './components/Loading'
+import NoConnection from './components/NoConnection'
 
 function App() {
 
-  const [health, setHealth] = useState([])
+  const Connection = ({ children }) => {
 
-  async function serverHealth() {
-    // GET /health
-    try {
-      const response = await api.get('/health')
-      setHealth(response.data.status)
-    } catch (error) {
-      console.log(error)
+    const { health, handleRetry } = useContext(ConnectionContext);
+
+    if (health !== 'OK' && health) {
+      return <Loading />
+    } else {
+      if (health === 'OK') {
+        return children
+      } else {
+        return (
+          <NoConnection/>
+        )
+      }
     }
   }
 
-  function handleRetry() {
-    serverHealth()
-  }
-
-  useEffect(() => {
-    serverHealth()
-  }, [])
-
   return (
-    <>
-      {health !== 'OK' ? (
-        <BrowserRouter>
-          <Routes>
-            {/* <Route exact path="/" element={<Questions />} /> */}
-            {/* route like this /questions?filter=${}*/}
-            <Route path="/questions" element={<Questions />} />
-            <Route path="/questions/:question_id" element={<QuestionDetails />} />
-          </Routes>
-        </BrowserRouter>
-      ) : (
-
-        <div className="serverDown">
-          <div className='offlineMessage'>
-            <MdSignalWifiConnectedNoInternet1 size={32} />
-            <h1>
-              Server offline
-            </h1>
-          </div>
-
-          <Lottie
-            loop
-            animationData={lottieJson}
-            play
-            style={{ width: '50%', height: '50%' }}
-          />
-          <button className='buttonRetry' onClick={handleRetry}>
-            Retry
-          </button>
-        </div>
-
-
-        // <div className="serverDown">
-        //   <div className='message'>
-        //     <h1>Server is down</h1>
-        //     <button className='buttonRetry' onClick={handleRetry}>
-        //       Retry
-        //     </button>
-        //   </div>
-        // </div>
-      )
-      }
-    </>
+    <BrowserRouter>
+      <ConnectionProvider>
+        <Routes>
+          <Route
+            exact path="/questions"
+            element={
+              <Connection>
+                <Questions />
+              </Connection>
+            } />
+          <Route
+            path="/questions/:question_id"
+            element={
+              <Connection>
+                <QuestionDetails />
+              </Connection>
+            } />
+        </Routes>
+      </ConnectionProvider>
+    </BrowserRouter>
   )
 }
 
