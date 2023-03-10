@@ -8,9 +8,6 @@ const Header = ({health}) => {
       <div>
         <h1>Bliss Applications</h1>
       </div>
-      <div>
-        <h2>Server status</h2>
-      </div>
     </div>
   )
 }

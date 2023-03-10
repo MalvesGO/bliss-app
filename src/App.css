@@ -4,8 +4,16 @@
     background-color: #535cfa;
     color: #fff;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+}
+
+.offlineMessage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
 }
 
 .message{
@@ -16,9 +24,14 @@
 .buttonRetry{
     background-color: #fff;
     color: #535cfa;
-    border: none;
+    padding: 1rem 4rem;
     border-radius: 5px;
-    padding: 10px;
-    margin-top: 20px;
+    border: none;
     cursor: pointer;
+}
+
+.buttonRetry:hover{
+    background-color: #999bbf;
+    color: #fff;
+    transition: ease-in-out 0.3s;
 }
