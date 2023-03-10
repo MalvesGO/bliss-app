@@ -1,12 +1,12 @@
 import { useContext } from 'react'
 import Lottie from 'react-lottie-player'
 import { MdSignalWifiConnectedNoInternet1 } from 'react-icons/md'
-import lottieJson from '../../assets/data.json'
+import internet from '../../assets/data.json'
 import { ConnectionContext } from '../../contexts/ConnectionContext'
 
 const NoConnection = () => {
 
-    const {  handleRetry } = useContext(ConnectionContext);
+    const { handleRetry } = useContext(ConnectionContext);
 
     return (
         <div className="serverDown">
@@ -18,7 +18,7 @@ const NoConnection = () => {
             </div>
             <Lottie
                 loop
-                animationData={lottieJson}
+                animationData={internet}
                 play
                 style={{ width: '50%', height: '50%' }}
             />

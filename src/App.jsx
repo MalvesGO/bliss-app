@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 
 import { ConnectionProvider, ConnectionContext } from './contexts/ConnectionContext'
 
@@ -14,7 +14,7 @@ function App() {
 
   const Connection = ({ children }) => {
 
-    const { health, handleRetry } = useContext(ConnectionContext);
+    const { health } = useContext(ConnectionContext);
 
     if (health !== 'OK' && health) {
       return <Loading />
@@ -23,7 +23,7 @@ function App() {
         return children
       } else {
         return (
-          <NoConnection/>
+          <NoConnection />
         )
       }
     }
@@ -34,7 +34,14 @@ function App() {
       <ConnectionProvider>
         <Routes>
           <Route
-            exact path="/questions"
+            exact path="/"
+            element={
+              <Connection>
+                <Navigate to="/questions" />
+              </Connection>
+            } />
+          <Route
+            path="/questions"
             element={
               <Connection>
                 <Questions />
