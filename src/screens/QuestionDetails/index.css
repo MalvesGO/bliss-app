@@ -10,6 +10,16 @@
     margin-bottom: 2rem;
 }
 
+.dateQuestion {
+    font-size: 1.2rem;
+    color: #535CFA;
+}
+
+.questionTitle {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
 .actions {
     display: flex;
     flex-direction: row;
@@ -29,6 +39,26 @@
     color: #fff;
     padding: 1rem;
     border-radius: 15px;
+    cursor: pointer;
+}
+
+.selected {
+    width: '100%';
+    background: green;
+    color: #fff;
+    padding: 1rem;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.buttonVote {
+    background: #fff;
+    border-color: #535CFA;
+    padding: 1rem 6rem;
+    border-radius: 15px;
+    color: #535CFA;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .image_url {

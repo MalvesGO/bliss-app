@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 import { IoMdArrowRoundBack } from 'react-icons/io'
 import { HiOutlineShare } from 'react-icons/hi'
@@ -13,16 +14,17 @@ import Loading from '../../components/Loading'
 
 const QuestionDetails = () => {
 
-  const params = useParams();
+  const { question_id } = useParams();
 
   const [question, setQuestion] = useState([])
   const [choices, setChoices] = useState([])
   const [loading, setLoading] = useState(true)
+  const [active, setActive] = useState();
 
   async function getQuestion() {
     // GET /questions/:question_id
     try {
-      const response = await api.get(`/questions/${params.question_id}`)
+      const response = await api.get(`/questions/${question_id}`)
       setLoading(false)
       setQuestion(response.data)
       setChoices(response.data.choices)
@@ -30,6 +32,70 @@ const QuestionDetails = () => {
       console.log(error)
     }
   }
+
+  async function handleVote() {
+    // PUT /questions/:question_id
+    try {
+      const response = await api.put(`/questions/${question_id}`, { choice: active });
+      if (response.status === 201) {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Your vote has been successfully submitted',
+          showConfirmButton: false,
+          timer: 3000
+        })
+      } else {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Error in submitting your vote',
+          showConfirmButton: false,
+          timer: 3000
+        })
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // share question
+  async function handleShare() {
+
+    const url = `https://blissrecruitmentapi.docs.apiary.io/#reference/0/questions/list-questions?console=1`
+
+    Swal.fire({
+      title: 'Share this quiz with your friends... Enter email',
+      input: 'email',
+      inputAttributes: {
+        autocapitalize: 'off'
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Send',
+      showLoaderOnConfirm: true,
+      preConfirm: (email) => {
+        return api.post('/share', { destination_email: email, content_url: url })
+          .then(response => {
+            if (response.status === 200) {
+              return email
+            }
+          })
+          .catch(error => {
+            Swal.showValidationMessage(
+              `Request failed: ${error}`
+            )
+          })
+      },
+      allowOutsideClick: () => !Swal.isLoading()
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: `Email sent to ${result.value}`
+        })
+      }
+    })
+  }
+
 
   useEffect(() => {
     getQuestion()
@@ -46,25 +112,25 @@ const QuestionDetails = () => {
 
                 <div className='questionHeader'>
                   <div>
-                    <h1>{question.question}</h1>
-                    <p>{new Date(question.published_at).toLocaleDateString('pt-BR', {
-                      day: '2-digit',
-                      month: '2-digit',
-                      year: 'numeric'
-                    })}</p>
+                    <span className='dateQuestion'>
+                      {new Date(question.published_at).toLocaleDateString('pt-BR', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric'
+                      })}
+                    </span>
+                    <h1 className='questionTitle'>
+                      {question.question}
+                    </h1>
                   </div>
 
+                  {/* actions */}
                   <div className='actions'>
                     <Link to='/questions'>
                       <IoMdArrowRoundBack size={30} />
                     </Link>
-
-                    <Link to='/questions'>
-                      <HiOutlineShare size={30} />
-                    </Link>
-
+                    <HiOutlineShare size={30} onClick={handleShare} />
                   </div>
-
                 </div>
 
                 <img className='image_url' src={question.image_url} alt={question.image_url} />
@@ -73,16 +139,22 @@ const QuestionDetails = () => {
                   {
                     choices.map((choice) => {
                       return (
-                        <div key={choice.choice} className='questionCard'>
+                        <div key={choice.choice}
+                          onClick={() => setActive(choice.choice)}
+                          className={active === choice.choice ? "selected" : "questionCard"}>
                           <p>{choice.choice}</p>
-                          <p>{choice.votes}</p>
                         </div>
                       )
                     })
                   }
                 </div>
 
-                <button>Vote</button>
+                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                  <button className='buttonVote'
+                    onClick={
+                      () => handleVote()
+                    }>Vote</button>
+                </div>
 
               </div>
             </>
