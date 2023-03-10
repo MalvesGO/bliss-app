@@ -62,8 +62,6 @@ const QuestionDetails = () => {
   // share question
   async function handleShare() {
 
-    const url = `https://blissrecruitmentapi.docs.apiary.io/#reference/0/questions/list-questions?console=1`
-
     Swal.fire({
       title: 'Share this quiz with your friends... Enter email',
       input: 'email',
@@ -74,7 +72,7 @@ const QuestionDetails = () => {
       confirmButtonText: 'Send',
       showLoaderOnConfirm: true,
       preConfirm: (email) => {
-        return api.post('/share', { destination_email: email, content_url: url })
+        return api.post('/share', { destination_email: email, content_url: window.location.href })
           .then(response => {
             if (response.status === 200) {
               return email
