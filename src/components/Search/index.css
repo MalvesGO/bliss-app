@@ -54,4 +54,17 @@
     .search .title {
         font-size: 1rem;
     }
+
+    .search .actions {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .search .button {
+        width: 100%;
+    }
+
+
 }
