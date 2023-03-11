@@ -109,21 +109,17 @@ const QuestionDetails = () => {
         {
           loading ? <Loading /> : (
             <>
-              <div className="questionDetails">
+              {/* question header */}
+              <QuestionHeader question={question} handleShare={handleShare} />
 
-                {/* question header */}
-                <QuestionHeader question={question} handleShare={handleShare} />
-
-                {/* quiz component */}
-                <Quiz
-                  question={question}
-                  choices={choices}
-                  active={active}
-                  setActive={setActive}
-                  handleVote={handleVote}
-                />
-
-              </div>
+              {/* quiz component */}
+              <Quiz
+                question={question}
+                choices={choices}
+                active={active}
+                setActive={setActive}
+                handleVote={handleVote}
+              />
             </>
           )
         }
