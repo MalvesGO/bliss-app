@@ -1,14 +1,17 @@
-import React from 'react'
+import {useContext} from 'react'
+import { ConnectionContext } from '../../contexts/ConnectionContext'
+import { Link } from 'react-router-dom'
 
 import './index.css'
-
-import { Link } from 'react-router-dom'
 
 // icons
 import { IoMdArrowRoundBack } from 'react-icons/io'
 import { HiOutlineShare } from 'react-icons/hi'
 
-const QuestionHeader = ({ question, handleShare }) => {
+const QuestionHeader = ({ question }) => {
+
+    const { handleShare } = useContext(ConnectionContext);
+
     return (
         <div className='questionHeader'>
             <div className='contentHeader'>
@@ -30,7 +33,7 @@ const QuestionHeader = ({ question, handleShare }) => {
             </div>
             <HiOutlineShare
                 size={30}
-                onClick={handleShare}
+                onClick={() => handleShare(question.id)}
                 style={{ cursor: 'pointer' }}
             />
         </div>

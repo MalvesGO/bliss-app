@@ -4,9 +4,6 @@ import './index.css'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
-// libs
-import Swal from 'sweetalert2'
-
 // api
 import api from '../../services/api'
 
@@ -63,41 +60,6 @@ const QuestionDetails = () => {
     }
   }
 
-  // share question
-  async function handleShare() {
-
-    Swal.fire({
-      title: 'Share this Quiz with your friends... Enter email',
-      input: 'email',
-      inputAttributes: {
-        autocapitalize: 'off'
-      },
-      showCancelButton: true,
-      confirmButtonText: 'Send',
-      showLoaderOnConfirm: true,
-      preConfirm: (email) => {
-        return api.post(`/share?destination_email=${email}&content_url=${window.location.href}`)
-          .then(response => {
-            if (response.status === 200) {
-              return email
-            }
-          })
-          .catch(error => {
-            Swal.showValidationMessage(
-              `Request failed: ${error}`
-            )
-          })
-      },
-      allowOutsideClick: () => !Swal.isLoading()
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          title: `Question sent to ${result.value}`
-        })
-      }
-    })
-  }
-
   useEffect(() => {
     getQuestion()
   }, [])
@@ -110,7 +72,7 @@ const QuestionDetails = () => {
           loading ? <Loading /> : (
             <>
               {/* question header */}
-              <QuestionHeader question={question} handleShare={handleShare} />
+              <QuestionHeader question={question} />
 
               {/* quiz component */}
               <Quiz

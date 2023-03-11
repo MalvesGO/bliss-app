@@ -22,11 +22,21 @@
 .questionTitle {
     font-size: 2rem;
     font-weight: bold;
+    margin-top: 0.5rem;
 }
 
 /* mobile */
 @media (max-width: 768px) {
     .questionTitle {
         font-size: 1.3rem;
+        margin-top: 0.5rem;
+    }
+
+    .questionHeader {
+        padding: 1rem 1rem;
+    }
+
+    .contentHeader {
+        gap: 1rem;
     }
 }
