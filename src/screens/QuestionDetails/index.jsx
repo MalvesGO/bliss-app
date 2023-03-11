@@ -4,6 +4,9 @@ import './index.css'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
+// libs
+import Swal from 'sweetalert2'
+
 // api
 import api from '../../services/api'
 
