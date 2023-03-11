@@ -15,6 +15,7 @@ import api from '../../services/api'
 // components
 import Header from '../../components/Header'
 import Loading from '../../components/Loading'
+import Quiz from '../../components/Quiz'
 
 const QuestionDetails = () => {
 
@@ -67,7 +68,7 @@ const QuestionDetails = () => {
   async function handleShare() {
 
     Swal.fire({
-      title: 'Share this quiz with your friends... Enter email',
+      title: 'Share this Quiz with your friends... Enter email',
       input: 'email',
       inputAttributes: {
         autocapitalize: 'off'
@@ -110,7 +111,6 @@ const QuestionDetails = () => {
           loading ? <Loading /> : (
             <>
               <div className="questionDetails">
-
                 <div className='questionHeader'>
                   <div className='contentHeader'>
                     <Link to='/questions'>
@@ -129,7 +129,6 @@ const QuestionDetails = () => {
                       </h1>
                     </div>
                   </div>
-
                   <HiOutlineShare
                     size={30}
                     onClick={handleShare}
@@ -137,32 +136,8 @@ const QuestionDetails = () => {
                   />
                 </div>
 
-                <div className='quizContainer'>
-                  <img className='image_url' src={question.image_url} alt={question.image_url} />
-
-                  <div className='questionsOptions'>
-                    <p>Choose your Question</p>
-                    {
-                      choices.map((choice) => {
-                        return (
-                          <div key={choice.choice}
-                            onClick={() => setActive(choice.choice)}
-                            className={active === choice.choice ? "selected" : "option"}>
-                            <p>{choice.choice}</p>
-                          </div>
-                        )
-                      })
-                    }
-
-                    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                      <button className='buttonVote'
-                        onClick={
-                          () => handleVote()
-                        }>Vote</button>
-                    </div>
-
-                  </div>
-                </div>
+                {/* quiz component */}
+                <Quiz question={question} choices={choices} active={active} setActive={setActive} handleVote={handleVote} />
 
               </div>
             </>

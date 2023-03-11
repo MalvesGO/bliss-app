@@ -46,12 +46,12 @@
         flex-direction: column;
     }
 
-    .button {
+    .search  .button {
         padding: 1rem 2rem;
         font-size: 1rem;
     }
 
-    .title {
+    .search .title {
         font-size: 1rem;
     }
 }
