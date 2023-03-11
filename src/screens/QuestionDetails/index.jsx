@@ -112,53 +112,56 @@ const QuestionDetails = () => {
               <div className="questionDetails">
 
                 <div className='questionHeader'>
-                  <div>
-                    <span className='dateQuestion'>
-                      {new Date(question.published_at).toLocaleDateString('pt-BR', {
-                        day: '2-digit',
-                        month: '2-digit',
-                        year: 'numeric'
-                      })}
-                    </span>
-                    <h1 className='questionTitle'>
-                      {question.question}
-                    </h1>
-                  </div>
-
-                  {/* actions */}
-                  <div className='actions'>
+                  <div className='contentHeader'>
                     <Link to='/questions'>
-                      <IoMdArrowRoundBack size={30} />
+                      <IoMdArrowRoundBack size={30} color='#fff' />
                     </Link>
-                    <HiOutlineShare
-                      size={30}
-                      onClick={handleShare}
-                      style={{ cursor: 'pointer' }}
-                    />
+                    <div>
+                      <span className='dateQuestion'>
+                        {new Date(question.published_at).toLocaleDateString('pt-BR', {
+                          day: '2-digit',
+                          month: '2-digit',
+                          year: 'numeric'
+                        })}
+                      </span>
+                      <h1 className='questionTitle'>
+                        {question.question}
+                      </h1>
+                    </div>
                   </div>
+
+                  <HiOutlineShare
+                    size={30}
+                    onClick={handleShare}
+                    style={{ cursor: 'pointer' }}
+                  />
                 </div>
 
-                <img className='image_url' src={question.image_url} alt={question.image_url} />
+                <div className='quizContainer'>
+                  <img className='image_url' src={question.image_url} alt={question.image_url} />
 
-                <div className='questionCards'>
-                  {
-                    choices.map((choice) => {
-                      return (
-                        <div key={choice.choice}
-                          onClick={() => setActive(choice.choice)}
-                          className={active === choice.choice ? "selected" : "questionCard"}>
-                          <p>{choice.choice}</p>
-                        </div>
-                      )
-                    })
-                  }
-                </div>
+                  <div className='questionsOptions'>
+                    <p>Choose your Question</p>
+                    {
+                      choices.map((choice) => {
+                        return (
+                          <div key={choice.choice}
+                            onClick={() => setActive(choice.choice)}
+                            className={active === choice.choice ? "selected" : "option"}>
+                            <p>{choice.choice}</p>
+                          </div>
+                        )
+                      })
+                    }
 
-                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                  <button className='buttonVote'
-                    onClick={
-                      () => handleVote()
-                    }>Vote</button>
+                    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                      <button className='buttonVote'
+                        onClick={
+                          () => handleVote()
+                        }>Vote</button>
+                    </div>
+
+                  </div>
                 </div>
 
               </div>
