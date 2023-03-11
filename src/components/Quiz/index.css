@@ -41,6 +41,11 @@
     transition: ease-in-out 0.2s;
 }
 
+/* button :disabled */
+.button:disabled {
+    cursor: not-allowed;
+}
+
 .image_url {
     max-width: 100%;
     height: auto;

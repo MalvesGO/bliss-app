@@ -137,7 +137,13 @@ const QuestionDetails = () => {
                 </div>
 
                 {/* quiz component */}
-                <Quiz question={question} choices={choices} active={active} setActive={setActive} handleVote={handleVote} />
+                <Quiz
+                  question={question}
+                  choices={choices}
+                  active={active}
+                  setActive={setActive}
+                  handleVote={handleVote}
+                />
 
               </div>
             </>
