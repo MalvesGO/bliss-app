@@ -49,6 +49,7 @@ http://bliss-app.vercel.app/
 
 ![App Screenshot](https://raw.githubusercontent.com/MalvesGO/bliss-app/main/src/assets/screenshots/QuestionHome.png)
 ![App Screenshot](https://raw.githubusercontent.com/MalvesGO/bliss-app/main/src/assets/screenshots/QuestionDetails.png)
+![App Screenshot](https://raw.githubusercontent.com/MalvesGO/bliss-app/main/src/assets/screenshots/NoConnection.png)
 ![App Screenshot](https://raw.githubusercontent.com/MalvesGO/bliss-app/main/src/assets/screenshots/QuestionsHomeMobile.png)
 ![App Screenshot](https://raw.githubusercontent.com/MalvesGO/bliss-app/main/src/assets/screenshots/QuestionsDetailsMobile.png)
 

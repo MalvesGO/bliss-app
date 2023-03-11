@@ -7,25 +7,16 @@ import './App.css'
 
 import Questions from './screens/Questions'
 import QuestionDetails from './screens/QuestionDetails'
-import Loading from './components/Loading'
 import NoConnection from './components/NoConnection'
 
 function App() {
 
   const Connection = ({ children }) => {
-
     const { health } = useContext(ConnectionContext);
-
-    if (health !== 'OK' && health) {
-      return <Loading />
+    if(health === 'Network Error'){
+      return <NoConnection />
     } else {
-      if (health === 'OK') {
-        return children
-      } else {
-        return (
-          <NoConnection />
-        )
-      }
+      return children
     }
   }
 

@@ -14,7 +14,7 @@ export const ConnectionProvider = ({ children }) => {
             const response = await api.get('/health')
             setHealth(response.data.status)
         } catch (error) {
-            console.log(error)
+            setHealth(error.message)
         }
     }
 

@@ -13,7 +13,7 @@ const NoConnection = () => {
             <div className='offlineMessage'>
                 <MdSignalWifiConnectedNoInternet1 size={32} />
                 <h1>
-                    Server offline
+                    Server offline 🙁
                 </h1>
             </div>
             <Lottie
