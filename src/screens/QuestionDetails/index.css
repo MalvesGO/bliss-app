@@ -28,3 +28,10 @@
     font-weight: bold;
 }
 
+/* mobile */
+@media (max-width: 768px) {
+    .questionTitle {
+        font-size: 1.3rem;
+    }
+}
+
