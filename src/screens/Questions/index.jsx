@@ -35,16 +35,12 @@ const Questions = () => {
     const response = await api.get(`/questions?limit=${limit}&offset=${offset}&filter=${search}`)
     setTotal(response.data.length)
     setQuestions(response.data)
+    setSearch('')
     setLoading(false)
   }
 
   function handleNavigateToQuestion(id) {
     navigate(`/questions/${id}`)
-  }
-
-  function cancelSearch() {
-    setSearch('')
-    fetchQuestions()
   }
 
   useEffect(() => {
@@ -61,7 +57,7 @@ const Questions = () => {
             :
             <>
               {/* search component */}
-              <Search search={search} setSearch={setSearch} fetchQuestions={fetchQuestions} cancelSearch={cancelSearch} />
+              <Search search={search} setSearch={setSearch} fetchQuestions={fetchQuestions} />
 
               {/* questions list component */}
               <QuestionsList questions={questions} handleNavigateToQuestion={handleNavigateToQuestion} />

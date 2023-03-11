@@ -5,6 +5,12 @@
     margin-top: 1rem;
 }
 
+.notFound {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .question {
     cursor: pointer;
     background: #535CFA;
