@@ -1,0 +1,32 @@
+.questionHeader {
+    background-color: #535CFA;
+    color: #fff;
+    padding: 1rem 2rem;
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.contentHeader {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.dateQuestion {
+    font-size: 1.2rem;
+}
+
+.questionTitle {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* mobile */
+@media (max-width: 768px) {
+    .questionTitle {
+        font-size: 1.3rem;
+    }
+}

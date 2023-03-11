@@ -1,13 +1,11 @@
+// style
 import './index.css'
 
 import { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 // libs
 import Swal from 'sweetalert2'
-
-import { IoMdArrowRoundBack } from 'react-icons/io'
-import { HiOutlineShare } from 'react-icons/hi'
 
 // api
 import api from '../../services/api'
@@ -15,6 +13,7 @@ import api from '../../services/api'
 // components
 import Header from '../../components/Header'
 import Loading from '../../components/Loading'
+import QuestionHeader from '../../components/QuestionHeader'
 import Quiz from '../../components/Quiz'
 
 const QuestionDetails = () => {
@@ -111,30 +110,9 @@ const QuestionDetails = () => {
           loading ? <Loading /> : (
             <>
               <div className="questionDetails">
-                <div className='questionHeader'>
-                  <div className='contentHeader'>
-                    <Link to='/questions'>
-                      <IoMdArrowRoundBack size={30} color='#fff' />
-                    </Link>
-                    <div>
-                      <span className='dateQuestion'>
-                        {new Date(question.published_at).toLocaleDateString('pt-BR', {
-                          day: '2-digit',
-                          month: '2-digit',
-                          year: 'numeric'
-                        })}
-                      </span>
-                      <h1 className='questionTitle'>
-                        {question.question}
-                      </h1>
-                    </div>
-                  </div>
-                  <HiOutlineShare
-                    size={30}
-                    onClick={handleShare}
-                    style={{ cursor: 'pointer' }}
-                  />
-                </div>
+
+                {/* question header */}
+                <QuestionHeader question={question} handleShare={handleShare} />
 
                 {/* quiz component */}
                 <Quiz
