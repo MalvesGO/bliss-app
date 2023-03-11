@@ -5,10 +5,16 @@ const Search = ({ search, setSearch, fetchQuestions, cancelSearch }) => {
     return (
         <div className='search'>
             <input type='text' placeholder='Search by keyword' value={search} onChange={(e) => setSearch(e.target.value)} />
-            <div className='actions'>
-                <button className='button' onClick={() => fetchQuestions()}>Search</button>
-                <button className='button' onClick={() => cancelSearch()}>Cancel</button>
-            </div>
+            {/* check size of search: {search.length} to show buttons */}
+            {
+                search.length > 2 ?
+                    <div className='actions'>
+                        <button className='button' onClick={() => fetchQuestions()}>Search</button>
+                        <button className='button' onClick={() => cancelSearch()}>Cancel</button>
+                    </div>
+                    :
+                    ''
+            }
         </div>
     )
 }

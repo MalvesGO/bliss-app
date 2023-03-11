@@ -6,7 +6,7 @@ const Quiz = ({ question, choices, active, setActive, handleVote }) => {
         <div className='quizContainer'>
             <img className='image_url' src={question.image_url} alt={question.image_url} />
             <div className='questionsOptions'>
-                <p>Select an answer</p>
+                <p>Select an answer to Vote</p>
                 <hr />
                 {
                     choices.map((choice) => {
