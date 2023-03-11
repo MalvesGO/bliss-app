@@ -14,3 +14,11 @@ body {
   margin: 0 auto;
   margin-top: 2rem;
 }
+
+/* mobile */
+
+@media (max-width: 768px) {
+  .container {
+    max-width: 95%;
+  }
+}
