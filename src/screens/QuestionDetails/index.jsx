@@ -93,7 +93,7 @@ const QuestionDetails = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
-          title: `Email sent to ${result.value}`
+          title: `Question sent to ${result.value}`
         })
       }
     })
