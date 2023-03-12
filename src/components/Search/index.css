@@ -5,6 +5,12 @@
     gap: 1rem;
 }
 
+.search form{
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+}
+
 .search .actions {
     display: flex;
     align-items: center;
